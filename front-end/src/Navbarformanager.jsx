@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GoSearch } from "react-icons/go";
 import { Link, useLocation, useHistory} from 'react-router-dom';
 
-const Navbarwithsearch = () => {
+const Navbarformanager = () => {
     const location = useLocation();
     const [loggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
@@ -22,30 +22,21 @@ const Navbarwithsearch = () => {
 
     return (
         <nav className="w-full flex justify-between items-center bg-black text-white border-b-2 border-[#e66b4b]">
-            
-
             <div className="flex items-center space-x-4">
-                <Link className="text-white bg-red-500 px-4 py-2 rounded hover:text-[#f1356d]" to="/aboutus">About Us</Link>
-                
-                {((location.pathname === "/searchHome" ) && loggedIn) ? (
+                <Link className="text-white bg-red-500 mt-3 mb-3 ml-2 px-4 py-2 rounded hover:text-[#f1356d]" to="/stock">Check Stock</Link>
                     <Link 
-                        className="text-white bg-red-500 px-4 py-2 rounded hover:text-[#f1356d]" 
-                        onClick={handleLogout} 
-                        to="/"
-                    >
-                        Logout
+                        className="text-white bg-red-500 mt-3 mb-3 px-4 py-2 rounded hover:text-[#f1356d] p-2" 
+                        to="/sellsum">
+                        Sum sell
                     </Link>
-                ) : (
                     <Link 
-                        className="text-white bg-red-500 px-4 py-2 rounded hover:text-[#f1356d]" 
-                        to="/login"
-                    >
-                        Login
+                        className="text-white bg-red-500 mt-3 mb-3 px-4 py-2 rounded hover:text-[#f1356d] p-2" 
+                        to="/staff">
+                        Staff
                     </Link>
-                )}
             </div>
         </nav>
     );
 };
 
-export default Navbarwithsearch;
+export default Navbarformanager;
