@@ -7,7 +7,7 @@ const Staffpage = () => {
 
       {Mockupsales.map((product) => (
         <button key={product.id}>
-          <div className="bg-white max-w-m h-full rounded-lg overflow-hidden shadow-md">
+          <div className="bg-white max-w-m h-full mt-5 rounded-lg overflow-hidden shadow-md">
             <img
               className="w-52 h-52 object-cover object-center"
               src={product.photo}

@@ -4,6 +4,8 @@ import React from 'react';
 import Login from './login';
 import Navbarformanager from './Navbarformanager';
 import Staffpage from './Staffpage';
+import Navbarforstaff from './Navbarforstaff';
+import Stockformanager from './Stockformanager';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 class App extends React.Component {
   render() {
@@ -22,7 +24,12 @@ class App extends React.Component {
                     <Navbarformanager/>
           </Route>
           <Route path="/staff">
+          <Navbarforstaff/>
                     <Staffpage/>
+          </Route>
+          <Route path="/managerstock">
+          <Navbarforstaff/>
+                    <Stockformanager/>
           </Route>
           </Switch>
             </div>
