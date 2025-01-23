@@ -5,41 +5,32 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
-    const fetchLogin = () => {
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        };
-        fetch(`/login?username=${username}&password=${password}`, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        alert("Not found user");
-                    } else {
-                        throw new Error('Network response was not ok');
-                    }
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (Array.isArray(data.results) && data.results.length > 0) {
-                    // User found
-                    if (data.status === "0") {
-                        alert("Not found user");
-                    } else if (data.status === "1") {
-                        console.log(data.results);
-                        localStorage.setItem("access_token", data.access_token);
-                        localStorage.setItem("username", username);
-                        localStorage.setItem("AID", data.results[0].AID);
-                        history.push('./ProductManage', { user: data.results[0] });
-                    }
-                } else {
-                    console.error('No user found');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching login:', error);
-            });
+    const fetchLogin =  (event) => {
+            fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username, pass:password }),
+              })
+                .then((res) => res.json()) // Convert response to JSON
+                .then((data) => {
+                  const token = data.token; // Access the token
+                  if(token){
+                  const username2 = data.name;
+                  const role = data.role;
+                  console.log("Token:", token);
+                  localStorage.setItem("authToken", token); // Store it securely
+                  localStorage.setItem("username", username2);
+                  localStorage.setItem("role", role);
+                  localStorage.setItem("branchid", data.branchid);
+                  console.log(localStorage)
+                  if(role === "staff"){
+                  history.push('./staffproducts', { username:username2,role:role});}else{
+                    history.push('./stock', { username:username2,role:role});
+                  }}
+                  
+                })
+                .catch((error) => console.error("Login error:", error));
+                
     };
 
     const handleLogin = () => {
@@ -73,7 +64,7 @@ const Login = () => {
                     />
                 </div>
                     <div className="form-group flex flex-col ">
-                        <div className="text-gray-500 text-sm mb-4 underline items-right text-right block mb-5 invisible">Forgot password</div>
+                        <div className="text-gray-500 text-sm mb-4 underline items-right text-right block invisible">Forgot password</div>
                         <button className='p-3 bg-red-500 text-white rounded-md hover:bg-black items-center' onClick={handleLogin}>Enter</button>
                     </div>
                 </div>

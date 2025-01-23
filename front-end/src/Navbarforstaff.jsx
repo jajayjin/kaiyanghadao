@@ -26,7 +26,7 @@ const Navbarforstaff = () => {
                 <Link className="text-white bg-red-500 mt-3 mb-3 ml-2 px-4 py-2 rounded hover:text-[#f1356d]" to="/stock">Check Stock</Link>
                     <Link 
                         className="text-white bg-red-500 mt-3 mb-3 px-4 py-2 rounded hover:text-[#f1356d] p-2" 
-                        to="/sellsum">
+                        to="/Sellsummary">
                         Sum sell
                     </Link>
                    
